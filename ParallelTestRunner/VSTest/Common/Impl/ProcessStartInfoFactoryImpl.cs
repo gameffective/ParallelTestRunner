@@ -11,9 +11,10 @@ namespace ParallelTestRunner.VSTest.Common.Impl
         {
             string testNames = ConcatFixtures(data.Fixtures);
             string settings = string.Concat(data.Root, "\\", data.RunId, ".settings");
-            return new ProcessStartInfo()
-            {
-                FileName = data.Executable,
+                        
+            ProcessStartInfo p = new ProcessStartInfo()
+            {                                
+            FileName = data.Executable,
                 Arguments =
                     "\"" + data.AssemblyName + "\"" +
                     " \"/settings:" + settings + "\"" +
@@ -21,8 +22,19 @@ namespace ParallelTestRunner.VSTest.Common.Impl
                     " /Tests:" + testNames,
                 RedirectStandardOutput = true,
                 CreateNoWindow = true,
-                UseShellExecute = false
+                UseShellExecute = false                
             };
+
+            // Added to allow giving specific name to each running thread
+            // This info is obtained and then passed on as environment parameter
+            string reportName = System.Environment.GetEnvironmentVariable("ReportName");
+            if (reportName == null)
+            {
+                reportName = "parallel test runner";
+            }
+           p.EnvironmentVariables["ReportName"] = reportName + " #" + System.Threading.Thread.CurrentThread.ManagedThreadId;
+            
+            return p;
         }
 
         private string ConcatFixtures(IList<TestFixture> items)
