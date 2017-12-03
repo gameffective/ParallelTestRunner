@@ -1,4 +1,7 @@
 # ParallelTestRunner
+This is an updated version of [ParallelTestRunner](https://github.com/sscobici/ParallelTestRunner).
+
+What is ParallelTestRunner?
 Parallel test runner for Visual Studio tests. It allows to control how the tests are executed in parallel by providing different options and TestGroupAttribute (see Additional Info).<br><br>
 For simple Visual Studio parallel tests run you can use this [suggestion](http://stackoverflow.com/questions/3917060/how-to-run-unit-tests-mstest-in-parallel/17820520#17820520).
 
@@ -10,11 +13,12 @@ Allows parallel run of Visual Studio tests from the command line. Primary usage 
 ParallelTestRunner.exe [options] [assembly]...
 
 Options:
-  provider:        specifies which version of VSTest.Console.exe to use: VSTEST_2012, VSTEST_2013, ...
+  provider:        specifies which version of VSTest.Console.exe to use: VSTEST_2012, VSTEST_2013, ...,  VSTEST_2017
   threadcount:     specifies the number of parallel processes, default is 4
   root:            the working directory where the temporary files will be generated
   out:             resulting trx file, can be absolute path or relative to the working directory
   plevel:          specifies what should be run in parallel: TestClass, TestMethod. Default is TestClass
+  filtermode:      should only run tests marked by attribute (TestClassForCIParellel / TestMethodForCIParellel) default is true
   
 assembly           the list of assemblies which contain visual studio tests
 
@@ -38,6 +42,29 @@ By default all TestClasses are executed in parallel. TestMethods inside each Tes
 
 Create the following class in your test project and apply it to test class or method:
 ```
+    
+    /// <summary>
+    /// Used to mark a class to be executed as part of a parallel test execution
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
+    public class TestClassForCIParellel : Attribute
+    {
+        public TestClassForCIParellel()
+        {
+        }
+    }
+
+    /// <summary>
+    /// Used to mark a method to be executed as part of a parallel test execution
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
+    public class TestMethodForCIParellel : Attribute
+    {
+        public TestMethodForCIParellel()
+        {
+        }
+    }
+    
     public class TestGroupAttribute : Attribute
     {
         public TestGroupAttribute()
