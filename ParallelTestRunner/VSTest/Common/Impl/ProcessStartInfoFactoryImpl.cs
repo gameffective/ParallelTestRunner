@@ -36,10 +36,34 @@ namespace ParallelTestRunner.VSTest.Common.Impl
                     text.Append(",");
                 }
 
-                text.Append(item.Name);
+                if ((item.TestsNames != null) && (item.TestsNames.Count > 0))
+                {
+                    text.Append(ListStringsToString(item.TestsNames));
+                }
+                else
+                {
+                    text.Append(item.Name);
+                }
                 first = false;
             }
 
+            return text.ToString();
+        }
+
+        private string ListStringsToString(IList<string> items)
+        {
+            StringBuilder text = new StringBuilder();
+            bool first = true;
+            foreach (string current in items)
+            {
+                if (!first)
+                {
+                    text.Append(",");
+                }
+                text.Append(current);
+
+                first = false;
+            }
             return text.ToString();
         }
     }

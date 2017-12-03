@@ -30,7 +30,7 @@ namespace ParallelTestRunner.Tests.VSTest
             args.Stub(m => m.PLevel).Return(PLevel.TestClass);
 
             Assembly assembly = Assembly.GetExecutingAssembly();
-            TestAssembly testAssembly = target.Parse(assembly);
+            TestAssembly testAssembly = target.Parse(assembly, false);
             Assert.AreEqual(assembly.Location, testAssembly.Name);
           
             TestFixture testClass1 = testAssembly.Fixtures.FirstOrDefault(x => x.Name == "ParallelTestRunner.Tests.VSTest.TestClass1");
@@ -50,7 +50,7 @@ namespace ParallelTestRunner.Tests.VSTest
             args.Stub(m => m.PLevel).Return(PLevel.TestMethod);
 
             Assembly assembly = Assembly.GetExecutingAssembly();
-            TestAssembly testAssembly = target.Parse(assembly);
+            TestAssembly testAssembly = target.Parse(assembly, false);
             Assert.AreEqual(assembly.Location, testAssembly.Name);
 
             TestFixture testClass1TestMethod1 = testAssembly.Fixtures.FirstOrDefault(x => x.Name == "ParallelTestRunner.Tests.VSTest.TestClass1.TestMethod1");

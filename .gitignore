@@ -8,3 +8,4 @@ packages/Autofac*
 packages/RhinoMocks*
 packages/StyleCop.MSBuild*
 *.suo
+/.vs

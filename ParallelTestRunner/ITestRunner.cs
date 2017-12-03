@@ -4,7 +4,7 @@
     {
         int ResultCode { get; }
 
-        void Parse();
+        void Parse(bool isFilterMode);
         
         void Execute();
         

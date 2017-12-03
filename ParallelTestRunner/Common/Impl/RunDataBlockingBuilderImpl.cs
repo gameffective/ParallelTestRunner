@@ -51,7 +51,7 @@ namespace ParallelTestRunner.Common.Impl
                 Exclusive = fixture.Exclusive ?? false,
                 Executable = Args.GetExecutablePath(),
                 RunId = Guid.NewGuid(),
-                AssemblyName = testAssembly.Name
+                AssemblyName = testAssembly.Name                
             };
             if (!string.IsNullOrEmpty(fixture.Group))
             {

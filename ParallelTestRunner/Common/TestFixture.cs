@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ParallelTestRunner.Common
 {
@@ -9,5 +10,7 @@ namespace ParallelTestRunner.Common
         public string Group { get; set; }
         
         public bool? Exclusive { get; set; }
+
+        public IList<string> TestsNames { get; set; }
     }
 }

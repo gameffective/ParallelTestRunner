@@ -31,7 +31,7 @@ namespace ParallelTestRunner.Impl
         
         public IWindowsFileHelper WindowsFileHelper { get; set; }
 
-        public void Parse()
+        public void Parse(bool isFilterMode)
         {
             if (Breaker.IsBreakReceived())
             {
@@ -41,7 +41,7 @@ namespace ParallelTestRunner.Impl
             foreach (string assemblyPath in Args.AssemblyList)
             {
                 Assembly assembly = WindowsFileHelper.GetAssembly(assemblyPath);
-                TestAssembly testAssembly = Parser.Parse(assembly);
+                TestAssembly testAssembly = Parser.Parse(assembly, isFilterMode);
                 IList<RunData> items = RunDataBuilder.Create(testAssembly);
                 RunDataListBuilder.Add(items);
             }

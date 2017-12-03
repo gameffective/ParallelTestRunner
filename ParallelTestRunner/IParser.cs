@@ -5,6 +5,6 @@ namespace ParallelTestRunner
 {
     public interface IParser
     {
-        TestAssembly Parse(Assembly assembly);
+        TestAssembly Parse(Assembly assembly, bool isFilterMode);
     }
 }

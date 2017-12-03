@@ -10,14 +10,28 @@ namespace ParallelTestRunner.VSTest.Impl
     {
         public ITestRunnerArgs Args { get; set; }
 
-        public TestAssembly Parse(Assembly assembly)
+        public TestAssembly Parse(Assembly assembly, bool isFilterMode)
         {
             IList<Type> types = new List<Type>();
             foreach (Type type in assembly.ExportedTypes)
             {
+                // if this class is marked is a class containing tests
                 if (type.CustomAttributes.Any(x => x.AttributeType.Name == "TestClassAttribute"))
                 {
-                    types.Add(type);
+                    // if we are in filter mode
+                    if (isFilterMode)
+                    {
+                        // only add classes that are marked to pass the filter fules
+                        if (type.CustomAttributes.Any(x => x.AttributeType.Name == "TestClassForCIParellel"))
+                        {
+                            types.Add(type);
+                        }
+                    }
+                    // if we are not in filter mode, add any class marked as containing tests
+                    else
+                    {
+                        types.Add(type);
+                    }
                 }
             }
 
@@ -32,6 +46,17 @@ namespace ParallelTestRunner.VSTest.Impl
                     fixture.Name = type.FullName;
                     SetGroupAndExclusiveParams(type, fixture);
 
+                    // added to allow executing only marked methods within specified testClass
+                    fixture.TestsNames = new List<string>();
+
+                    if (isFilterMode)
+                    {
+                        foreach (MemberInfo memberInfo in type.GetMethods().Where(x => x.CustomAttributes.Any(y => y.AttributeType.Name == "TestMethodForCIParellel")))
+                        {
+                            fixture.TestsNames.Add(type.FullName + "." + memberInfo.Name);
+                        }
+                    }
+
                     item.Fixtures.Add(fixture);
                 }
                 else if (Args.PLevel == PLevel.TestMethod)
@@ -39,7 +64,16 @@ namespace ParallelTestRunner.VSTest.Impl
                     TestFixture testClassFixture = new TestFixture();
                     SetGroupAndExclusiveParams(type, testClassFixture);
 
-                    foreach (MemberInfo memberInfo in type.GetMethods().Where(x => x.CustomAttributes.Any(y => y.AttributeType.Name == "TestMethodAttribute")))
+                    string attributeName = null;
+                    if (isFilterMode)
+                    {
+                        attributeName = "TestMethodForCIParellel";
+                    }
+                    else
+                    {
+                        attributeName = "TestMethodAttribute";
+                    }
+                    foreach (MemberInfo memberInfo in type.GetMethods().Where(x => x.CustomAttributes.Any(y => y.AttributeType.Name == attributeName)))
                     {
                         TestFixture fixture = new TestFixture();
                         fixture.Name = type.FullName + "." + memberInfo.Name;

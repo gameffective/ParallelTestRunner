@@ -12,6 +12,7 @@ namespace ParallelTestRunner.Impl
             Output = "Result.trx";
             ThreadCount = 4;
             PLevel = PLevel.TestClass;
+            filterMode = true;
         }
 
         public string Provider { get; set; }
@@ -25,6 +26,8 @@ namespace ParallelTestRunner.Impl
         public string Output { get; set; }
 
         public PLevel PLevel { get; set; }
+
+        public bool filterMode { get; set; }
 
         public string GetExecutablePath()
         {

@@ -33,7 +33,7 @@ namespace ParallelTestRunner
             using (container.BeginLifetimeScope())
             {
                 ITestRunner testRunner = container.Resolve<ITestRunner>();
-                testRunner.Parse();
+                testRunner.Parse(testArgs.filterMode);
                 testRunner.Execute();
                 testRunner.WriteTrx();
                 testRunner.Clean();
@@ -79,6 +79,13 @@ namespace ParallelTestRunner
             Console.WriteLine("\tspecifies what should be run parallel");
             Console.WriteLine("\tExamples: plevel:testclass");
             Console.WriteLine("\t\t  plevel:testmethod");
+
+            Console.WriteLine();
+            Console.WriteLine("filtermode:");
+            Console.WriteLine("\tshould only run tests marked by attribute, default is true");
+            Console.WriteLine("\tExamples: filtermode:true");
+            Console.WriteLine("\t\t  filtermode:false");
+
         }
     }
 }
