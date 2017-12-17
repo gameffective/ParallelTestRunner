@@ -22,12 +22,13 @@ namespace ParallelTestRunner.VSTest.Common.Impl
 
             runData.Output.AppendLine(data);
 
-            if (data.StartsWith("Passed  ") ||
+            /*if (data.StartsWith("Passed  ") ||
                 data.StartsWith("Failed  ") ||
                 data.StartsWith("Skipped  "))
             {
                 Console.WriteLine(data);
-            }
+            }*/
+            Console.WriteLine(data);
         }
     }
 }
