@@ -44,11 +44,18 @@ namespace ParallelTestRunner.Impl
                 }
                 else if (item.StartsWith("filtermode:", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    bool result;
-                    if (bool.TryParse(item.Remove(0, 11), out result))
+                    FilterMode result;                    
+                    if (Enum.TryParse(item.Remove(0, 11), out result))
                     {
                         data.filterMode = result;
+                    } else
+                    {
+                        Console.WriteLine("An error occur trying to parse FilterMode argument.. using default value of 'Attribute'");
                     }
+                }
+                else if (item.StartsWith("filtercategory:", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    data.filterCategory = item.Remove(0, 15);
                 }
                 else
                 {

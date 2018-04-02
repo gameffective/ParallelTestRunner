@@ -64,6 +64,7 @@
     <Compile Include="Common\NativeMethods.cs" />
     <Compile Include="Common\Trx\TestResult.cs" />
     <Compile Include="Common\Trx\ResultFile.cs" />
+    <Compile Include="FilterMode.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ICleaner.cs" />
     <Compile Include="Common\IBreaker.cs" />

@@ -232,7 +232,7 @@ namespace ParallelTestRunner.Tests
         {
             breaker.Expect((m) => m.IsBreakReceived()).Return(true);
 
-            VerifyTarget(() => target.Parse(false));
+            VerifyTarget(() => target.Parse(FilterMode.None, null));
         }
 
         [TestMethod]
@@ -251,17 +251,17 @@ namespace ParallelTestRunner.Tests
                 args.Expect(m => m.AssemblyList).Return(assemblyList);
 
                 windowsFileHelper.Expect((m) => m.GetAssembly(assemblyList[0])).Return(assemblyAbc);
-                parser.Expect((m) => m.Parse(assemblyAbc, false)).Return(testAssemblyAbc);
+                parser.Expect((m) => m.Parse(assemblyAbc, FilterMode.None, null)).Return(testAssemblyAbc);
                 runDataBuilder.Expect(m => m.Create(testAssemblyAbc)).Return(itemsAbc);
                 runDataListBuilder.Expect(m => m.Add(itemsAbc));
 
                 windowsFileHelper.Expect((m) => m.GetAssembly(assemblyList[1])).Return(assemblyAbb);
-                parser.Expect((m) => m.Parse(assemblyAbb, false)).Return(testAssemblyAbb);
+                parser.Expect((m) => m.Parse(assemblyAbb, FilterMode.None, null)).Return(testAssemblyAbb);
                 runDataBuilder.Expect(m => m.Create(testAssemblyAbb)).Return(itemsAbb);
                 runDataListBuilder.Expect(m => m.Add(itemsAbb));
             }
 
-            VerifyTarget(() => target.Parse(false));
+            VerifyTarget(() => target.Parse(FilterMode.None, null));
         }
 
         [TestMethod]

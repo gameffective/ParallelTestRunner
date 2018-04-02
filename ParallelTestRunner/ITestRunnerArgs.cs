@@ -17,7 +17,9 @@ namespace ParallelTestRunner
 
         PLevel PLevel { get; }
 
-        bool filterMode { get; }
+        FilterMode filterMode { get; }
+
+        string filterCategory { get; }
 
         string GetExecutablePath();
 
