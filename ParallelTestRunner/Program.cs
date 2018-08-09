@@ -35,7 +35,16 @@ namespace ParallelTestRunner
                 ITestRunner testRunner = container.Resolve<ITestRunner>();
                 testRunner.Parse(testArgs.filterMode, testArgs.filterCategory);
                 testRunner.Execute();
-                testRunner.WriteTrx();
+                try
+                {
+                    testRunner.WriteTrx();
+                }
+                catch (Exception)
+                {
+
+                    //throw;
+                }
+                
                 testRunner.Clean();
                 resultCode = testRunner.ResultCode;
             }
