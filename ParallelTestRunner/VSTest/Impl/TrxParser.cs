@@ -116,8 +116,10 @@ namespace ParallelTestRunner.VSTest.Impl
                             if (errorReader.ReadToFollowing("Message"))
                             {
                                 item.ErrorMessage = reader.ReadElementContentAsString();
-                                errorReader.ReadToNextSibling("StackTrace");
-                                item.StackTrace = errorReader.ReadElementContentAsString();
+                                if (errorReader.ReadToNextSibling("StackTrace"))
+                                {
+                                    item.StackTrace = errorReader.ReadElementContentAsString();
+                                }
                             }
                         }
 
