@@ -37,20 +37,20 @@ namespace ParallelTestRunner
                 testRunner.Parse(testArgs.filterMode, testArgs.filterCategory);
                 testRunner.Execute();
 
-                for (int i = 0; i < 20; i++)
-                {
-                    try
-                    {
+                //for (int i = 0; i < 20; i++)
+                //{
+                //    try
+                //    {
                         testRunner.WriteTrx();
-                        break;
-                    }
-                    catch (Exception)
-                    {
+                //        break;
+                //    }
+                //    catch (Exception)
+                //    {
                         
-                    }
+                //    }
                     
-                    Thread.Sleep(500);
-                }
+                //    Thread.Sleep(500);
+                //}
 
                 testRunner.Clean();
                 resultCode = testRunner.ResultCode;
