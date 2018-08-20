@@ -5,6 +5,7 @@ using ParallelTestRunner.Autofac;
 using ParallelTestRunner.Impl;
 using System.Reflection;
 using ParallelTestRunner.Common;
+using System.Threading;
 
 namespace ParallelTestRunner
 {
@@ -35,18 +36,20 @@ namespace ParallelTestRunner
                 ITestRunner testRunner = container.Resolve<ITestRunner>();
                 testRunner.Parse(testArgs.filterMode, testArgs.filterCategory);
                 testRunner.Execute();
-                for (int i = 0; i < 1000; i++)
+
+                for (int i = 0; i < 20; i++)
                 {
                     try
                     {
                         testRunner.WriteTrx();
+                        break;
                     }
                     catch (Exception)
                     {
-
-                        break;
+                        
                     }
-
+                    
+                    Thread.Sleep(500);
                 }
 
                 testRunner.Clean();
