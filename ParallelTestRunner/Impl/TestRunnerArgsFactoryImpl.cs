@@ -55,7 +55,9 @@ namespace ParallelTestRunner.Impl
                 }
                 else if (item.StartsWith("filtercategory:", StringComparison.InvariantCultureIgnoreCase))
                 {
+                    System.Diagnostics.Debug.WriteLine(item.ToString());
                     data.filterCategory = item.Remove(0, 15);
+
                 }
                 else
                 {
