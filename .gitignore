@@ -9,4 +9,3 @@ packages/RhinoMocks*
 packages/StyleCop.MSBuild*
 *.suo
 /.vs
-/ParallelTestRunner/Properties/Resources.resx
