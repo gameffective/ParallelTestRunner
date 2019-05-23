@@ -37,6 +37,10 @@ namespace ParallelTestRunner
             {
                 ITestRunner testRunner = container.Resolve<ITestRunner>();
                 Console.WriteLine("finish container.Resolve<IStopwatch>().Start();");
+
+                Console.WriteLine("testArgs.filterCategory" + testArgs.filterCategory);
+                Console.WriteLine("estArgs.filterMode" + testArgs.filterMode);
+
                 testRunner.Parse(testArgs.filterMode, testArgs.filterCategory);
                 Console.WriteLine("finish  testRunner.Parse(testArgs.filterMode, testArgs.filterCategory);");
                 testRunner.Execute();
@@ -48,7 +52,7 @@ namespace ParallelTestRunner
                 resultCode = testRunner.ResultCode;
                 Console.WriteLine("finish  resultCode = testRunner.ResultCode;");
             }
-            Console.WriteLine("finish  resukt code is: " + resultCode);
+            Console.WriteLine("finish  resukt code is");
             return resultCode;
         }
 
