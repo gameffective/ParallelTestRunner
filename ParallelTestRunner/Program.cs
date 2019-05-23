@@ -30,17 +30,25 @@ namespace ParallelTestRunner
             IContainer container = AutofacContainer.RegisterTypes(testArgs);
 
             container.Resolve<IStopwatch>().Start();
+            Console.WriteLine("Starting container.Resolve<IStopwatch>().Start();");
+
             int resultCode = 2;
             using (container.BeginLifetimeScope())
             {
                 ITestRunner testRunner = container.Resolve<ITestRunner>();
+                Console.WriteLine("finish container.Resolve<IStopwatch>().Start();");
                 testRunner.Parse(testArgs.filterMode, testArgs.filterCategory);
+                Console.WriteLine("finish  testRunner.Parse(testArgs.filterMode, testArgs.filterCategory);");
                 testRunner.Execute();
+                Console.WriteLine("finish  testRunner.Execute();");
                 testRunner.WriteTrx();
+                Console.WriteLine("finish testRunner.WriteTrx(); ");
                 testRunner.Clean();
+                Console.WriteLine("finish testRunner.Clean();");
                 resultCode = testRunner.ResultCode;
+                Console.WriteLine("finish  resultCode = testRunner.ResultCode;");
             }
-
+            Console.WriteLine("finish  resukt code is: " + resultCode);
             return resultCode;
         }
 
