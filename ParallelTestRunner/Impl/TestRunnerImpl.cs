@@ -37,10 +37,12 @@ namespace ParallelTestRunner.Impl
             {
                 return;
             }
-
+            var assemblies = string.Join(",",Args.AssemblyList);
+            Console.WriteLine($"assemblies are: {assemblies}.");
             foreach (string assemblyPath in Args.AssemblyList)
             {
                 Assembly assembly = WindowsFileHelper.GetAssembly(assemblyPath);
+                //TODO logs
                 TestAssembly testAssembly = Parser.Parse(assembly, filterMode, filterCategory);
                 IList<RunData> items = RunDataBuilder.Create(testAssembly);
                 RunDataListBuilder.Add(items);
