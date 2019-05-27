@@ -8,9 +8,12 @@ namespace ParallelTestRunner.Impl
         public ITestRunnerArgs ParseArgs(string[] args)
         {
             TestRunnerArgsImpl data = new TestRunnerArgsImpl();
+            Console.WriteLine("logMe  1");
             data.AssemblyList = new List<string>();
+            Console.WriteLine("logMe  2");
             for (int i = 0; i < args.Length; i++)
             {
+                Console.WriteLine("logMe  3");
                 string item = args[i].Replace("\"", string.Empty);
                 if (item.StartsWith("provider:", StringComparison.InvariantCultureIgnoreCase))
                 {

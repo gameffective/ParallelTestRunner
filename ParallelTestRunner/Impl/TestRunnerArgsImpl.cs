@@ -9,11 +9,13 @@ namespace ParallelTestRunner.Impl
     {
         public TestRunnerArgsImpl()
         {
+            Console.WriteLine("logMe  4");
             Output = "Result.trx";
             ThreadCount = 4;
             PLevel = PLevel.TestClass;
             filterMode = FilterMode.Attribute;
             filterCategory = null;
+            Console.WriteLine("logMe  5");
         }
 
         public string Provider { get; set; }
