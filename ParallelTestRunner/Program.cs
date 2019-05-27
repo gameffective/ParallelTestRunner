@@ -28,7 +28,7 @@ namespace ParallelTestRunner
             Console.WriteLine("Starting test execution, please wait...");
 
             IContainer container = AutofacContainer.RegisterTypes(testArgs);
-
+            Console.WriteLine("logMe: IContainer container = AutofacContainer.RegisterTypes(testArgs); the contatier is : " + container.ToString()+ "   and the test args are : " + testArgs.ToString());
             container.Resolve<IStopwatch>().Start();
             Console.WriteLine("Starting container.Resolve<IStopwatch>().Start();");
 
