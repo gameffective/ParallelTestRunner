@@ -61,6 +61,7 @@ namespace ParallelTestRunner.Impl
                     System.Diagnostics.Debug.WriteLine(item.ToString());
                     data.filterCategory = item.Remove(0, 15);
                     Console.WriteLine("logMe   else if (item.StartsWith filtercategory:  the data is   : " + data.ToString());
+                    Console.WriteLine("logMe   the irem is: " + item.ToString());
 
                 }
                 else
