@@ -43,6 +43,7 @@ namespace ParallelTestRunner.Common.Impl
 
         public Assembly GetAssembly(string path)
         {
+            Console.WriteLine("Get assambly path : " + path );
             return Assembly.LoadFrom(path);
         }
 

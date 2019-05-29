@@ -60,6 +60,15 @@ namespace ParallelTestRunner.Impl
                 {
                     System.Diagnostics.Debug.WriteLine(item.ToString());
                     data.filterCategory = item.Remove(0, 15);
+
+                    data.filterCategories = new List<string>();
+
+                    IList<string> items = data.filterCategory.Split('|');
+                    foreach (  string catogry in items)
+                    {
+                        data.filterCategories.Add(catogry.ToString());
+                    }
+
                     Console.WriteLine("logMe   else if (item.StartsWith filtercategory:  the data is   : " + data.ToString());
                     Console.WriteLine("logMe   the irem is: " + item.ToString());
 

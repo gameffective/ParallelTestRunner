@@ -15,17 +15,18 @@ namespace ParallelTestRunner.Impl
             PLevel = PLevel.TestClass;
             filterMode = FilterMode.Attribute;
             filterCategory = null;
+            filterCategories = null;
             Console.WriteLine("logMe  5");
         }
 
         public string Provider { get; set; }
-        
+
         public IList<string> AssemblyList { get; set; }
-        
+
         public int ThreadCount { get; set; }
-        
+
         public string Root { get; set; }
-        
+
         public string Output { get; set; }
 
         public PLevel PLevel { get; set; }
@@ -33,6 +34,10 @@ namespace ParallelTestRunner.Impl
         public FilterMode filterMode { get; set; }
 
         public string filterCategory { get; set; }
+
+
+        //yuda
+        public List<string> filterCategories { get; set; }
 
         public string GetExecutablePath()
         {

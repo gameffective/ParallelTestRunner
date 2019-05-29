@@ -45,7 +45,7 @@ namespace ParallelTestRunner
                 Console.WriteLine("testArgs.filterCategory" + testArgs.filterCategory);
                 Console.WriteLine("estArgs.filterMode" + testArgs.filterMode);
 
-                testRunner.Parse(testArgs.filterMode, testArgs.filterCategory);
+                testRunner.Parse(testArgs.filterMode,testArgs.filterCategory, testArgs.filterCategories);
                 Console.WriteLine("finish  testRunner.Parse(testArgs.filterMode, testArgs.filterCategory);");
                 testRunner.Execute();
                 Console.WriteLine("finish  testRunner.Execute();");

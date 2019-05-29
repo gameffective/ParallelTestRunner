@@ -232,7 +232,7 @@ namespace ParallelTestRunner.Tests
         {
             breaker.Expect((m) => m.IsBreakReceived()).Return(true);
 
-            VerifyTarget(() => target.Parse(FilterMode.None, null));
+            VerifyTarget(() => target.Parse(FilterMode.None, null,filterCategories:null));
         }
 
         [TestMethod]
@@ -261,7 +261,7 @@ namespace ParallelTestRunner.Tests
                 runDataListBuilder.Expect(m => m.Add(itemsAbb));
             }
 
-            VerifyTarget(() => target.Parse(FilterMode.None, null));
+            VerifyTarget(() => target.Parse(FilterMode.None, null,null));
         }
 
         [TestMethod]

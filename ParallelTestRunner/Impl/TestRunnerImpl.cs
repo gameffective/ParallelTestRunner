@@ -12,40 +12,46 @@ namespace ParallelTestRunner.Impl
         public int ResultCode { get; set; }
 
         public ITestRunnerArgs Args { get; set; }
-        
+
         public IParser Parser { get; set; }
-        
+
         public ICollector Collector { get; set; }
-        
+
         public ICleaner Cleaner { get; set; }
-        
+
         public IRunDataBuilder RunDataBuilder { get; set; }
-        
+
         public IRunDataListBuilder RunDataListBuilder { get; set; }
-        
+
         public IExecutorLauncher ExecutorLauncher { get; set; }
-        
+
         public ITrxWriter TrxWriter { get; set; }
-        
+
         public IBreaker Breaker { get; set; }
-        
+
         public IWindowsFileHelper WindowsFileHelper { get; set; }
 
-        public void Parse(FilterMode filterMode, string filterCategory)
+        public void Parse(FilterMode filterMode, string filterCategory, List<string> filterCategories)
         {
             if (Breaker.IsBreakReceived())
             {
                 return;
             }
-            var assemblies = string.Join(",",Args.AssemblyList);
+            var assemblies = string.Join(",", Args.AssemblyList);
             Console.WriteLine($"assemblies are: {assemblies}.");
             foreach (string assemblyPath in Args.AssemblyList)
             {
                 Assembly assembly = WindowsFileHelper.GetAssembly(assemblyPath);
                 //TODO logs
-                TestAssembly testAssembly = Parser.Parse(assembly, filterMode, filterCategory);
-                IList<RunData> items = RunDataBuilder.Create(testAssembly);
-                RunDataListBuilder.Add(items);
+
+                foreach (string category in filterCategories)
+                {
+                    Console.WriteLine("In the catogey : " + category);
+                    TestAssembly testAssembly = Parser.Parse(assembly, filterMode, category);
+                    Console.WriteLine("test assmaly is  : " + testAssembly + "in the category: " + category);
+                    IList<RunData> items = RunDataBuilder.Create(testAssembly);
+                    RunDataListBuilder.Add(items);
+                }
             }
         }
 
