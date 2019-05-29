@@ -15,8 +15,8 @@ namespace ParallelTestRunner
 
         public static int Main(string[] args)
         {
-            Console.WriteLine("Parallel Test Execution Command Line Tool Version " + Assembly.GetCallingAssembly().GetName().Version.ToString());
             Console.WriteLine("logMe the args are : " + args.ToString());
+            Console.WriteLine("Parallel Test Execution Command Line Tool Version " + Assembly.GetCallingAssembly().GetName().Version.ToString());
 
             
             ITestRunnerArgs testArgs = argsFactory.ParseArgs(args);
